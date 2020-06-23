@@ -208,7 +208,8 @@ impl AntSystem {
                 self.pheromones[[r, c]] = evaporation;
 
                 for ant in 0..self.size {
-                    if edges[ant].contains(&(r, c)) {
+                    let traveled = edges[ant].contains(&(r, c)) || edges[ant].contains(&(c, r));
+                    if traveled {
                         let w = self.q / costs[ant];
                         write!(out, "+ {} ", w)?;
                         self.pheromones[[r, c]] += w;
